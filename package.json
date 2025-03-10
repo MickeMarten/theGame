@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@playcanvas/pcui": "^5.1.0",
+    "playcanvas": "^2.4.3",
+    "vite": "^6.1.0"
+  }
+}
