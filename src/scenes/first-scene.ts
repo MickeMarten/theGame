@@ -1,10 +1,8 @@
 import * as pc from "playcanvas";
-import { AssetManager } from "../../assets/asset-manager";
+import { findAsset } from "../../assets/asset-manager";
 export class FirstScene {
-    assets: AssetManager;
     app: pc.Application;
-    constructor(assetManager: AssetManager) {
-        this.assets = assetManager;
+    constructor() {
         this.app = pc.Application.getApplication() as pc.Application;
     }
 
@@ -18,12 +16,11 @@ export class FirstScene {
             screenSpace: true,
         });
         this.app.root.addChild(screen);
-        this.assets.loadAssets(() => {
             const text = new pc.Entity();
             text.addComponent("element", {
                 anchor: [0.5, 0.5, 0.5, 0.5], 
                 autoWidth: false,
-                fontAsset: this.assets.assets.font.id,
+                fontAsset: findAsset("font_courir"),
                 fontSize: 20,
                 pivot: [0.5, 0.5],
                 text: test,
@@ -47,6 +44,5 @@ export class FirstScene {
                     }, 2000);
                 }
             }, 50);
-        });
     }
 }

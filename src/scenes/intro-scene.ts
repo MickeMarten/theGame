@@ -1,14 +1,12 @@
 import * as pc from "playcanvas";
 import { Texture } from "playcanvas";
-import { AssetManager } from "../../assets/asset-manager";
+import { findAsset } from "../../assets/asset-manager";
 
 export class IntroScene {
     private app: pc.Application;
-    public assets: AssetManager;
 
-    constructor(assetManager: AssetManager) {
+    constructor() {
         this.app = pc.Application.getApplication() as pc.Application;
-        this.assets = assetManager;
     }
 
     public addLights() {
@@ -31,9 +29,16 @@ export class IntroScene {
         this.app.root.addChild(light);
     }
 
+    addFont(): pc.Asset | undefined {
+        const asset = findAsset("font_courir");
+        if(asset?.ready){
+            return asset;
+        }
+    }
+
     createBackgroundImage() {
         const bgImage = new Image();
-        bgImage.src = "assets/cyberCastle.webp";
+        bgImage.src = "assets/artwork/cyberCastle.webp";
         bgImage.onload = () => {
             this.addLights();
             const bgTexture = new Texture(this.app.graphicsDevice);
@@ -58,46 +63,45 @@ export class IntroScene {
     }
 
     printIntroText() {
-        this.assets.loadAssets(() => {
-            const screen = new pc.Entity();
-            screen.addComponent("screen", {
-                referenceResolution: new pc.Vec2(1280, 720),
-                scaleBlend: 0.5,
-                scaleMode: pc.SCALEMODE_BLEND,
-                screenSpace: true,
-            });
-            this.app.root.addChild(screen);
-
-            const loremIpsum =
-                "Darkness took once you, and you have strayed out of thought and time. Now you feel life in you again.";
-            const text = new pc.Entity();
-            text.addComponent("element", {
-                anchor: [0.5, 0.5, 0.5, 0.5],
-                autoWidth: false,
-                fontAsset: this.assets.assets.font.id,
-                fontSize: 10,
-                pivot: [0.5, 0.5],
-                text: loremIpsum,
-                type: pc.ELEMENTTYPE_TEXT,
-                width: 500,
-                wrapLines: true,
-            });
-            text.setLocalPosition(0, -80, 0);
-            screen.addChild(text);
-
-            text.element!.rangeStart = 0;
-            text.element!.rangeEnd = 0;
-
-            const id = setInterval(() => {
-                text.element!.rangeEnd += 1;
-
-                if (text.element!.rangeEnd >= loremIpsum.length) {
-                    clearInterval(id);
-                    setTimeout(() => {
-                        text.destroy();
-                    }, 2000);
-                }
-            }, 75);
+        const asset = this.addFont();
+        const screen = new pc.Entity();
+        screen.addComponent("screen", {
+            referenceResolution: new pc.Vec2(1280, 720),
+            scaleBlend: 0.5,
+            scaleMode: pc.SCALEMODE_BLEND,
+            screenSpace: true,
         });
+        this.app.root.addChild(screen);
+
+        const loremIpsum =
+            "Darkness took once you, and you have strayed out of thought and time. Now you feel life in you again.";
+        const text = new pc.Entity();
+        text.addComponent("element", {
+            anchor: [0.5, 0.5, 0.5, 0.5],
+            autoWidth: false,
+            fontAsset: asset,
+            fontSize: 10,
+            pivot: [0.5, 0.5],
+            text: loremIpsum,
+            type: pc.ELEMENTTYPE_TEXT,
+            width: 500,
+            wrapLines: true,
+        });
+        text.setLocalPosition(0, -80, 0);
+        screen.addChild(text);
+
+        text.element!.rangeStart = 0;
+        text.element!.rangeEnd = 0;
+
+        const id = setInterval(() => {
+            text.element!.rangeEnd += 1;
+
+            if (text.element!.rangeEnd >= loremIpsum.length) {
+                clearInterval(id);
+                setTimeout(() => {
+                    text.destroy();
+                }, 2000);
+            }
+        }, 75);
     }
 }
