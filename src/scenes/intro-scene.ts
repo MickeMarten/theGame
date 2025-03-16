@@ -1,4 +1,4 @@
-import * as pc from "playcanvas";
+/* import * as pc from "playcanvas";
 import { Texture } from "playcanvas";
 import { findAsset } from "../../assets/asset-manager";
 
@@ -105,3 +105,4 @@ export class IntroScene {
         }, 75);
     }
 }
+ */

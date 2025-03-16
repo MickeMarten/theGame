@@ -3,7 +3,8 @@ import { app, Application, Asset, AssetListLoader } from "playcanvas";
 const staticAssets = {
 
     font_courir: new Asset('font_courir', 'font', {url:"./assets/fonts/courier.json"} ),
-    ruins: new Asset('ruins', 'audio', {url:"./assets/music/Ruins.mp3"})
+    ruins: new Asset('ruins', 'audio', {url:"./assets/music/Ruins.mp3"}),
+    castle: new Asset('castle', 'texture', {url:"./assets/artwork/cyberCastle.webp"})
 
 
 }

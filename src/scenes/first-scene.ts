@@ -1,4 +1,4 @@
-import * as pc from "playcanvas";
+/* import * as pc from "playcanvas";
 import { findAsset } from "../../assets/asset-manager";
 export class FirstScene {
     app: pc.Application;
@@ -46,3 +46,4 @@ export class FirstScene {
             }, 50);
     }
 }
+ */
