@@ -14,6 +14,7 @@ export class Scene {
     constructor(image: Image) {
         this.bgImage = image;
         this.app = pc.Application.getApplication() as pc.Application;
+        this.addBackgroundImage()
     }
 
     addBackgroundImage() {

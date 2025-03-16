@@ -41,7 +41,7 @@ const scene1 = new Scene({
     position: { x: 300, y: 220 },
     assetKey: "castle",
 });
-scene1.addBackgroundImage();
+
 
 /*   const ruinsSound = findAsset("ruins");
     if(ruinsSound){
