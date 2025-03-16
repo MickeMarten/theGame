@@ -1,8 +1,8 @@
 import * as pc from "playcanvas";
-import { IntroScene } from "./src/scenes/intro-scene";
+import { Lore } from "./src/scenes/lore";
 import { findAsset, loadAssets } from "./assets/asset-manager";
-import { FirstScene } from "./src/scenes/first-scene";
-import { Scene } from "./src/scenes/scene";
+import { BgImage } from "./src/scenes/background-image";
+import { introLore } from "./assets/texts/texts";
 
 function startApp() {
     const canvas = document.getElementById("application") as HTMLCanvasElement;
@@ -25,22 +25,24 @@ function startApp() {
         window.removeEventListener("resize", resize);
     });
 
-    const light = new pc.Entity();
-    light.addComponent("light", {
-        type: "directional",
-        intensity: 1,
-    });
-    light.setEulerAngles(45, 0, 0);
-    app.root.addChild(light);
+
 
     return app;
 }
 startApp();
-const scene1 = new Scene({
+/* const scene1 = new BgImage({
     scale: { x: 500, y: 180 },
     position: { x: 300, y: 220 },
     assetKey: "castle",
 });
+const lore = new Lore({text:introLore.wakeup} );
+
+lore.printText()  */
+
+const wakeUpLore = new Lore({text:introLore.deploy, textWidth:20, textColor: new pc.Color(0, 1, 0, 0.3), fontSize:16, position:{x:2, y:-0.1, z:0}, fadeOut:true, textDrawSpeed:40})
+wakeUpLore.printText()
+    
+
 
 
 /*   const ruinsSound = findAsset("ruins");
