@@ -1,7 +1,7 @@
 import * as pc from "playcanvas";
 import { AssetKey, findAsset } from "../../assets/asset-manager";
 
-interface ImageProps {
+export interface ImageProps {
     scale: { x: number; y: number };
     position: { x: number; y: number };
     assetKey: AssetKey;
@@ -11,7 +11,7 @@ export class BgImage {
     private app: pc.Application;
     bgImageProps: ImageProps;
     dimmer:number;
-    isActive: boolean;
+    _isActive: boolean = true;
 
     constructor(imageProps: ImageProps) {
         this.bgImageProps = imageProps;
@@ -19,9 +19,22 @@ export class BgImage {
         this.addBackgroundImage();
     }
 
+    
+    public get isActive(){
+        return this._isActive;
+
+    }
+
+     public set isActive(isActive){
+        this._isActive = isActive;
+        
+
+    }
+
     addBackgroundImage() {
         const screen = new pc.Entity("Screen");
         screen.addComponent("screen", {
+            name:'screen',
             screenSpace: true,
             scaleMode: pc.SCALEMODE_BLEND,
             resolution: new pc.Vec2(0, 0),
@@ -34,6 +47,7 @@ export class BgImage {
             textureAsset.ready(() => {
                 const bgImage = new pc.Entity("BackgroundImage");
                 bgImage.addComponent("element", {
+                    name:"bgImage",
                     type: "image",
                     anchor: new pc.Vec4(0, 0, 0, 0),
                     pivot: new pc.Vec2(0.5, 0.5),
@@ -50,6 +64,7 @@ export class BgImage {
                 );
 
                 screen.addChild(bgImage);
+                
             });
         }
     }

@@ -1,7 +1,6 @@
 import * as pc from "playcanvas";
-import { Lore } from "./src/scenes/lore";
-import { findAsset, loadAssets } from "./assets/asset-manager";
-import { BgImage } from "./src/scenes/background-image";
+import { loadAssets } from "./assets/asset-manager";
+import { SceneManager } from "./src/scenes/scene-manager";
 import { introLore } from "./assets/texts/texts";
 
 function startApp() {
@@ -25,25 +24,36 @@ function startApp() {
         window.removeEventListener("resize", resize);
     });
 
-
-
     return app;
 }
 startApp();
-/* const scene1 = new BgImage({
-    scale: { x: 500, y: 180 },
-    position: { x: 300, y: 220 },
-    assetKey: "castle",
-});
-const lore = new Lore({text:introLore.wakeup} );
 
-lore.printText()  */
+/* const game = new SceneManager();
 
-const wakeUpLore = new Lore({text:introLore.deploy, textWidth:20, textColor: new pc.Color(0, 1, 0, 0.3), fontSize:16, position:{x:2, y:-0.1, z:0}, fadeOut:true, textDrawSpeed:40})
-wakeUpLore.printText()
+game.showScene(
+    {
+        text: introLore.wakeup,
+        textWidth: 0,
+        textColor: new pc.Color(1, 1, 1, 0.3),
+        fontSize: 12,
+        position: { x: 0, y: 0, z: 0 },
+        fadeOut: true,
+        textDrawSpeed: 40,
+    },
+    {
+        scale: { x: 500, y: 180 },
+        position: { x: 300, y: 220 },
+        assetKey: "castle",
+    },
+);
+ */
+/* setTimeout(() => {
+game.removeScene("BackgroundImage");
     
+}, 2000); */
 
-
+/* const wakeUpLore = new Lore({text:introLore.deploy, textWidth:20, textColor: new pc.Color(0, 1, 0, 0.3), fontSize:16, position:{x:2, y:-0.1, z:0}, fadeOut:true, textDrawSpeed:40})
+wakeUpLore.printText() */
 
 /*   const ruinsSound = findAsset("ruins");
     if(ruinsSound){
